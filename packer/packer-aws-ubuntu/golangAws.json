@@ -1,0 +1,35 @@
+{
+    "variables": {
+      "name": "golang_calculator_aws",
+      "source_ami": "ami-0dcf15c37a41c965f",
+      "region":"sa-east-1",      
+      "access_key":"",
+      "secret_key":""
+    },
+    "builders": [{
+      "type": "amazon-ebs",
+      "access_key": "{{user `access_key`}}",
+      "secret_key":"{{user `secret_key`}}",
+      "ami_name": "{{user `name`}}",
+      "region": "{{user `region`}}",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "run_tags":{"Name":"golang-calculator-microservice"}
+    }],
+    "provisioners": [
+        {
+        "type": "shell",
+        "script": "installAnsible.sh"
+    	},
+	{
+        "type": "ansible-local",
+        "playbook_file": "playbook.yml"
+    	},
+        {
+	"type": "file",
+ 	"source": "microservice.go",
+  	"destination": "~/"
+    	}
+      ]
+  }

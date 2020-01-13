@@ -1,0 +1,13 @@
+- hosts: localhost
+  become_user: root
+  become: yes
+
+  tasks:
+   - name: Update apt
+     apt:
+      update_cache: yes
+
+   - name: Installing Golang
+     apt:
+       name: golang
+       state: latest

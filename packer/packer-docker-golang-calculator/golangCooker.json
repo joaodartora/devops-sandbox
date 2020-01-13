@@ -1,0 +1,28 @@
+{
+    "builders": [{
+    "type": "docker",
+    "image": "golang:1.11",
+	"commit": true,
+	"pull": false,
+    "changes": [
+        "EXPOSE 8080",	
+        "ENTRYPOINT [\"go\", \"run\", \"/opt/microservice.go\"]"
+        ]
+    }],
+
+    "provisioners": [
+    {
+	"type": "file",
+ 	"source": "microservice.go",
+  	"destination": "/opt/"
+    }
+    ],
+    "post-processors": [
+        [
+           {
+              "type": "docker-tag",
+              "repository": "joaodartora/calculator"
+           }
+        ]
+      ]  
+}

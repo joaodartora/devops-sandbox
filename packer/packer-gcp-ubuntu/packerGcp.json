@@ -1,0 +1,40 @@
+{
+  "variables": {
+    "source_image_family": "ubuntu-1804-lts",
+    "machine_type": "f1-micro",
+    "region": "us-west1",
+    "zone": "us-west1-a",
+    "ssh_username": "",
+    "project_id": "",
+    "service_account_json": ""
+  },
+  "builders": [
+    {
+      "type": "googlecompute",
+      "project_id": "{{user `project_id`}}",
+      "machine_type": "{{user `machine_type`}}",
+      "source_image_family": "{{user `source_image_family`}}",
+      "region": "{{user `region`}}",
+      "zone": "{{user `zone`}}",
+      "image_description": "Golang Microservice Calculator",
+      "image_name": "golang-calculator",
+      "ssh_username": "{{user `ssh_username`}}",
+      "account_file": "{{ user `service_account_json`}}"
+    }
+  ],
+  "provisioners": [
+        {
+        "type": "shell",
+        "script": "installAnsible.sh"
+    	},
+	{
+        "type": "ansible-local",
+        "playbook_file": "playbook.yml"
+    	},
+        {
+	"type": "file",
+ 	"source": "microservice.go",
+  	"destination": "~/"
+    	}
+  ]
+}
