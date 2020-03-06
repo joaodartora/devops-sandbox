@@ -2,7 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-    config.vm.hostname = "ansible-test"
+    config.vm.hostname = "dartora"
+    config.vm.define "ansible-test"
     config.vm.box = "ubuntu/bionic64"
 
     config.vm.provision "shell", path: "installAnsible.sh"
