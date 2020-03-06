@@ -1,0 +1,11 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+    config.vm.hostname = "ansible-test"
+    config.vm.box = "ubuntu/bionic64"
+
+    config.vm.provision "shell", path: "installAnsible.sh"
+
+    config.vm.post_up_message = "Your Ubuntu 18.04 with Ansible is ready for use!"
+end
