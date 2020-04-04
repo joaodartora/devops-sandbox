@@ -1,0 +1,10 @@
+- hosts: localhost
+  become_user: root
+  become: yes
+  
+  tasks:
+
+   - shell: STATUS=$(ps -a | grep -c microservice); if [ $STATUS = 0 ]; then echo 'NOT RUNNING'; else echo 'RUNNING'; fi;
+     register: microservice_status
+   - debug: 
+      var: microservice_status.stdout

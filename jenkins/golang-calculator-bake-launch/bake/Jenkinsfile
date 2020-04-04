@@ -1,0 +1,11 @@
+node {
+        stage('clean-workspace') {
+            cleanWs()
+        }
+        stage('preparation') {
+            git url: 'https://github.com/joaodartora/golang-calculator-microservice.git'
+        }
+        stage('packer-build') {
+            sh 'packer build packer-golang.json'
+        }
+}

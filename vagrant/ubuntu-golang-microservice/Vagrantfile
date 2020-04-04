@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+    config.vm.hostname = "calculatorMicroservice"
+    config.vm.box = "ubuntu/xenial64"
+    config.vm.network "private_network", ip: "55.55.55.5"
+
+    config.vm.provision "shell", inline: "sudo apt -y install golang"
+    config.vm.provision "file", source: "calculator-microservice.go", destination: "$HOME/microservice.go"
+    config.vm.provision "file", source: "run_service.sh", destination: "$HOME/run_service.sh"
+    config.vm.provision "shell", inline: "chmod +x run_service.sh"
+
+    config.vm.post_up_message = "To use the service inside the VM enter with SSH and run the following commands: './run_service.sh start' or './run_service.sh stop'"
+end

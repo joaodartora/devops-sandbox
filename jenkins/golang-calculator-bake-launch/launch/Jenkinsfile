@@ -1,0 +1,8 @@
+node {
+        stage('clean-workspace') {
+            cleanWs()
+        }
+        stage('launch-docker-container') {
+            sh 'docker run -d -p 8031:8080 --name calculator-microservice joaodartora/calculator .'
+        }
+}
