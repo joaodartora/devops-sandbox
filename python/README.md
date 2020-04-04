@@ -1,1 +1,1 @@
-# To run the python scripts, open your terminal and type ```python {scriptName}.py``` to all the scripts.
+- To run the python scripts, open your terminal and type ```python {scriptName}.py``` to all the scripts.
